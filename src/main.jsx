@@ -9,6 +9,7 @@ import "./styles/base.css";
 import "./styles/animations.css";
 import "./styles/layout.css";
 import "./styles/ui.css";
+import "./styles/pages.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
