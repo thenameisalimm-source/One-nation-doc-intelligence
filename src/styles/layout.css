@@ -1,0 +1,349 @@
+/* ---------- App frame ---------- */
+.app {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-width: 0;
+  padding: var(--s-4);
+  padding-bottom: calc(var(--bottomnav-h) + var(--safe-bottom) + var(--s-5));
+}
+
+.page { min-width: 0; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: calc(var(--topbar-h) + var(--safe-top));
+  padding: var(--safe-top) var(--s-4) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  background: rgba(5, 5, 7, 0.78);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.topbar-title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ---------- Brand ---------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-5) var(--s-4) var(--s-4);
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--grad-ai);
+  box-shadow: var(--glow-ai);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.brand-mark-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+}
+
+.brand-name { font-family: var(--font-head); font-weight: 700; line-height: 1.1; }
+.brand-sub { font-size: 0.78rem; color: var(--teal-400); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ---------- Status pills ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--line-strong);
+  white-space: nowrap;
+}
+.pill-muted { color: var(--text-1); }
+.pill-warn  { color: var(--warn); border-color: rgba(245, 184, 75, 0.4); background: rgba(245, 184, 75, 0.08); }
+.pill-live  { color: var(--teal-300); border-color: rgba(45, 212, 191, 0.4); background: rgba(45, 212, 191, 0.08); }
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal-400);
+  animation: pulseDot 1.8s ease-out infinite;
+}
+
+/* ---------- Banner ---------- */
+.banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  margin: var(--s-3) var(--s-4) 0;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-md);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  border: 1px solid var(--line-strong);
+}
+.banner > svg { flex: none; margin-top: 2px; }
+.banner-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.banner-warn { background: rgba(245, 184, 75, 0.08); border-color: rgba(245, 184, 75, 0.35); color: #f8dca1; }
+.banner-demo { background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.4); color: var(--purple-300); }
+
+.banner-btn {
+  flex: none;
+  min-height: 36px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-0);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+/* ---------- Sidebar (desktop only) ---------- */
+.sidebar { display: none; }
+
+.nav-group { padding: 0 var(--s-3); margin-bottom: var(--s-4); }
+.nav-group-label {
+  padding: var(--s-2) var(--s-3);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border-radius: var(--r-md);
+  color: var(--text-1);
+  font-weight: 500;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.nav-link:hover { background: var(--bg-2); color: var(--text-0); }
+.nav-link.active {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(124, 58, 237, 0.32), rgba(124, 58, 237, 0.06));
+  box-shadow: inset 2px 0 0 var(--purple-400);
+}
+
+/* ---------- Bottom nav (Android / mobile) ---------- */
+.bottomnav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  height: calc(var(--bottomnav-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: rgba(11, 11, 16, 0.92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--line);
+}
+
+.bn-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  color: var(--text-2);
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: color var(--t-fast) var(--ease);
+}
+.bn-item span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bn-item:active { transform: scale(0.94); }
+.bn-item.active { color: var(--purple-300); }
+.bn-item.active svg { filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.6)); }
+
+/* ---------- "More" sheet ---------- */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.sheet {
+  width: 100%;
+  max-height: 85dvh;
+  overflow-y: auto;
+  padding: var(--s-3) var(--s-4) calc(var(--s-5) + var(--safe-bottom));
+  background: var(--bg-1);
+  border-top: 1px solid var(--line-strong);
+  border-radius: 24px 24px 0 0;
+  animation: slideUp var(--t-med) var(--ease) both;
+}
+
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  margin: 0 auto var(--s-3);
+  border-radius: 4px;
+  background: var(--line-strong);
+}
+
+.sheet-head { margin-bottom: var(--s-2); }
+.sheet-group { margin-top: var(--s-3); }
+.sheet-group .nav-group-label { padding-left: 0; }
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-2);
+}
+
+.sheet-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 76px;
+  padding: var(--s-2);
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--text-1);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-align: center;
+  min-width: 0;
+}
+.sheet-item:active { transform: scale(0.96); }
+.sheet-item.active {
+  color: #fff;
+  border-color: rgba(167, 139, 250, 0.6);
+  background: rgba(124, 58, 237, 0.2);
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--text-1);
+}
+.icon-btn:hover { background: var(--bg-2); }
+
+/* ---------- Empty / placeholder blocks ---------- */
+.empty-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-6) var(--s-4);
+  text-align: center;
+  background: var(--bg-1);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-lg);
+}
+.empty-block svg { color: var(--purple-400); }
+.empty-block code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--bg-3);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border-radius: var(--r-pill);
+  background: var(--grad-ai);
+  box-shadow: var(--glow-ai);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---------- Desktop / tablet landscape ---------- */
+@media (min-width: 900px) {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+    width: var(--sidebar-w);
+    height: 100vh;
+    height: 100dvh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    background: var(--bg-1);
+    border-right: 1px solid var(--line);
+  }
+
+  .bottomnav,
+  .sheet-backdrop { display: none; }
+
+  .brand-mark-sm { display: none; }
+
+  .topbar { padding-left: var(--s-5); padding-right: var(--s-5); }
+  .banner { margin-left: var(--s-5); margin-right: var(--s-5); }
+  .app-content { padding: var(--s-5); padding-bottom: var(--s-6); }
+}
+
+@media (min-width: 640px) and (max-width: 899px) {
+  .sheet {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
