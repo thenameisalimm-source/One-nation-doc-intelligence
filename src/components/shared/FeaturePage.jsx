@@ -1,7 +1,8 @@
- import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "./PageHeader.jsx";
 import VideoResults from "./VideoResults.jsx";
 import ChannelResults from "./ChannelResults.jsx";
+import AiResult from "./AiResult.jsx";
 import Card from "../ui/Card.jsx";
 import Badge from "../ui/Badge.jsx";
 import Button from "../ui/Button.jsx";
@@ -17,8 +18,10 @@ import { apiPost } from "../../services/apiClient.js";
 import { formatCount } from "../../utils/formatters.js";
 import "../../styles/forms.css";
 import "../../styles/results.css";
+import "../../styles/ai.css";
 
 const SERVICE_LABEL = { youtube: "YouTube API key", anthropic: "Anthropic API key" };
+const AI_TIMEOUT_MS = 30000;
 
 function initialValues(fields, prefs) {
   const out = {};
@@ -36,6 +39,9 @@ function blockedReason(status, requires) {
   if (status.error) return "Backend not reachable. " + status.error;
   if (!status.data || !status.data[requires]) {
     return "Needs the " + SERVICE_LABEL[requires] + ". Add it in Netlify environment variables, then redeploy.";
+  }
+  if (requires === "anthropic" && !status.data.model) {
+    return "ANTHROPIC_MODEL is not set. Add it in Netlify environment variables, then redeploy.";
   }
   return null;
 }
@@ -103,7 +109,7 @@ export default function FeaturePage({
     setResult(null);
     try {
       const body = task ? { task, ...trimmed } : trimmed;
-      const data = await apiPost(endpoint, body);
+      const data = await apiPost(endpoint, body, requires === "anthropic" ? AI_TIMEOUT_MS : undefined);
       const primary = trimmed[fields[0].key];
       setResult(data);
       setLastQuery(primary);
@@ -132,6 +138,7 @@ export default function FeaturePage({
   const isVideos = resultView === "videos" && result && Array.isArray(result.videos);
   const isChannel = resultView === "channel" && result && result.channel && typeof result.channel === "object";
   const hasText = result && typeof result.text === "string";
+  const isAiText = hasText && requires === "anthropic";
 
   return (
     <div className="stack">
@@ -184,7 +191,7 @@ export default function FeaturePage({
             disabled={Boolean(reason)}
             block
           >
-            {submitLabel}
+            {running && requires === "anthropic" ? "Generating…" : submitLabel}
           </Button>
         </form>
       </Card>
@@ -213,7 +220,9 @@ export default function FeaturePage({
 
           {isChannel && <ChannelResults data={result} kind={viewKind} />}
 
-          {!isVideos && !isChannel && (
+          {isAiText && <AiResult text={result.text} meta={result.meta} onSave={saveResult} />}
+
+          {!isVideos && !isChannel && !isAiText && (
             <Card glow>
               <div className="row" style={{ marginBottom: 12 }}>
                 <Badge tone={requires === "anthropic" ? "ai" : "live"}>
