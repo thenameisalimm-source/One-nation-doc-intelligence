@@ -17,6 +17,8 @@ export default function TrendingRadar() {
       historyType="trending"
       fields={FIELDS}
       submitLabel="Scan topic"
+      resultView="videos"
+      viewKind="trending"
       note="Scores are estimates from public data. Real view velocity needs stored observations over time."
     />
   );
