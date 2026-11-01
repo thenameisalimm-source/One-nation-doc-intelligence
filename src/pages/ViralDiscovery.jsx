@@ -18,6 +18,9 @@ export default function ViralDiscovery() {
       historyType="viral"
       fields={FIELDS}
       submitLabel="Find outperformers"
+      resultView="videos"
+      viewKind="viral"
+      note="Results start filtered to videos with more views than their channel has subscribers. Change the Show filter to see everything."
     />
   );
 }
