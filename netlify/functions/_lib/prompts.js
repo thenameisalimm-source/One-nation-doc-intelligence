@@ -132,8 +132,13 @@ export function buildOutline({ topic, length, notes }) {
 export function buildSection({ topic, notes, sections, index, previous }) {
   const total = sections.length;
   const current = sections[index];
+
+  // Every title and summary is user-controlled, so each one is wrapped as data.
   const outline = sections
-    .map((s, i) => i + 1 + ". " + s.title + (s.summary ? " - " + s.summary : ""))
+    .map(
+      (s, i) =>
+        i + 1 + ". " + data(s.title) + (s.summary ? " - " + data(s.summary) : "")
+    )
     .join("\n");
 
   const prompt = [
@@ -144,7 +149,8 @@ export function buildSection({ topic, notes, sections, index, previous }) {
     "Full outline, for context only:",
     outline,
     "",
-    'Write ONLY section ' + (index + 1) + ': "' + current.title + '"' + (current.summary ? " - " + current.summary : ""),
+    "Write ONLY section " + (index + 1) + ": " + data(current.title) +
+      (current.summary ? " - " + data(current.summary) : ""),
     "Length: about " + SECTION_WORDS + " words (between 150 and 200).",
     index === 0
       ? "This is the opening section. Start with a strong hook in the first two sentences."
@@ -160,4 +166,4 @@ export function buildSection({ topic, notes, sections, index, previous }) {
     .join("\n");
 
   return { system: system(FORMAT_TEXT), prompt, maxTokens: 900, temperature: 0.7 };
-    }
+}
