@@ -1,7 +1,7 @@
 import FeaturePage from "../components/shared/FeaturePage.jsx";
 
 const FIELDS = [
-  { key: "channel", label: "Channel name, handle or URL", type: "text", required: true, placeholder: "e.g. @channelhandle" },
+  { key: "channel", label: "Channel name, handle or URL", type: "text", required: true, placeholder: "e.g. @channelhandle", hint: "An @handle or channel link uses far less YouTube quota than a plain name." },
 ];
 
 export default function ChannelAnalytics() {
@@ -14,6 +14,8 @@ export default function ChannelAnalytics() {
       historyType="channel"
       fields={FIELDS}
       submitLabel="Load channel stats"
+      resultView="channel"
+      viewKind="analytics"
       note="Watch time, revenue and click-through rate are private to the channel owner and cannot be read from public data."
     />
   );
