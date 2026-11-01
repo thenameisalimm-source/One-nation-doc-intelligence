@@ -1,0 +1,60 @@
+.results-anchor { scroll-margin-top: 72px; }
+
+.meta-line {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+.stat-sm .stat-value { font-size: 1.3rem; overflow-wrap: anywhere; }
+
+.video-grid {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+.legend { display: flex; flex-direction: column; gap: var(--s-3); font-size: 0.88rem; }
+.legend-row { display: flex; gap: var(--s-3); align-items: flex-start; }
+.legend-row .badge { flex: none; margin-top: 2px; }
+.legend-row span:last-child { min-width: 0; overflow-wrap: anywhere; }
+
+details.explain { margin-top: var(--s-3); }
+details.explain summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--purple-300);
+}
+
+.channel-head { display: flex; gap: var(--s-4); align-items: flex-start; }
+.channel-avatar {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-3);
+}
+.channel-head-text { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+
+.standout {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.plain-list {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+a.btn { text-decoration: none; }
