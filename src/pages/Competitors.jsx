@@ -1,7 +1,7 @@
 import FeaturePage from "../components/shared/FeaturePage.jsx";
 
 const FIELDS = [
-  { key: "channel", label: "Channel name, handle or URL", type: "text", required: true, placeholder: "e.g. @channelhandle", hint: "Public data only." },
+  { key: "channel", label: "Channel name, handle or URL", type: "text", required: true, placeholder: "e.g. @channelhandle", hint: "An @handle or channel link uses far less YouTube quota than a plain name." },
 ];
 
 export default function Competitors() {
@@ -14,6 +14,8 @@ export default function Competitors() {
       historyType="competitor"
       fields={FIELDS}
       submitLabel="Analyse channel"
+      resultView="channel"
+      viewKind="competitor"
     />
   );
 }
